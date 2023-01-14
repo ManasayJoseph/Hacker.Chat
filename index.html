@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Socket.IO chat</title>
+    <style>
+        @font-face {
+            font-family: myFirstFont;
+            src: url(CmdFont.ttf);
+        }
+
+        #input {
+            font-family: inherit;
+            outline: none;
+            border: none;
+            caret-color: white;
+            color: white;
+            background-color: black;
+            font-weight: 500;
+            width: inherit;
+        }
+
+        #input:focus {
+            outline: none;
+        }
+
+        form {
+            display: flex;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            font-family: myFirstFont;
+            background-color: black;
+            color: white;
+        }
+
+        #messages {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .other {
+            color:white;
+        }
+        .me {
+            color:green;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Connected to {3004}</h3>
+    <ul id="messages"></ul>
+    <form id="form" action="">
+        <p>>></p>
+        <input id="input" autocomplete="off" />
+    </form>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+
+
+    <script>
+        var socket = io();
+
+        var messages = document.getElementById('messages');
+        var form = document.getElementById('form');
+        var input = document.getElementById('input');
+        var username = localStorage.getItem('username')
+
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (input.value) {
+                var message = {msg:input.value,sender:username}
+                socket.emit('chat message',message);
+                input.value = '';
+            }
+        });
+
+        socket.on('chat message', function (msg) {
+            var item = document.createElement('li');
+            if (msg.sender === username) {
+                item.classList.add('me');   
+            } else {
+                item.classList.add('other')
+            }
+            item.innerHTML = msg.msg;
+            messages.appendChild(item);
+            window.scrollTo(0, document.body.scrollHeight);
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>
