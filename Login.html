@@ -1,26 +1,43 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Join</title>
+    <title>Creed.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        @media (max-width: 600px) {
+            body {
+                font-size: 20px;
+            }
+
+            input {
+                background-color: black;
+                border: none;
+                caret-color: white;
+                color: white;
+                height: 60px;
+            }
+        }
+
         @font-face {
             font-family: myFirstFont;
             src: url(CmdFont.ttf);
         }
+
         body {
             background-color: black;
-            color:white;
+            color: white;
             font-family: myFirstFont;
             font-weight: 200;
         }
 
         input {
             background-color: black;
-            border:none;
+            border: none;
             caret-color: white;
-            color:white;
+            color: white;
         }
-        input:focus{
+
+        input:focus {
             outline: none;
         }
 
@@ -89,7 +106,7 @@
         var usernameForm = document.getElementById('username-form');
         var usernameInput = document.getElementById('username-input');
         var username = localStorage.getItem('username');
-        if (username){
+        if (username) {
             window.location.href = './Chat.com'
         }
 
@@ -100,7 +117,7 @@
             var username = usernameInput.value;
             localStorage.setItem('username', username);
             window.location.href = '/Chat.com';
-            username='';
+            username = '';
             // window.onload = function () {
             //     document.getElementById("loading").style.display = "none";
             //     document.getElementById("loading-spinner").style.display = "none";

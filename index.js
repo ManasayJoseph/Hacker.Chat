@@ -17,6 +17,7 @@ app.get('/Chat.com', (req, res) => {
 
 io.on('connection', (socket) => {
     console.log('a user connected');
+    io.emit('connection','wild user connected')
     socket.on('disconnect', () => {
       console.log('user disconnected');
     });
